@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
@@ -22,7 +24,16 @@ Route::get('/', function () {
 //Category Route
 Route::get('/category',[CategoryController::class,'index'])->name('category.index');
 Route::post('/category/store/',[CategoryController::class,'store'])->name('category.store');
+Route::get('/category/edit/{id}/',[CategoryController::class,'edit'])->name('category.edit');
+Route::post('/category/update/{id}/',[CategoryController::class,'update'])->name('category.update');
+Route::get('/category/softdelete/{id}/',[CategoryController::class,'softDelete'])->name('category.sdelete');
+Route::get('/category/restore/{id}/',[CategoryController::class,'restore'])->name('category.restore');
+Route::get('/category/destroy/{id}/',[CategoryController::class,'destroy'])->name('category.destroy');
 
+
+//brand route
+Route::get('/brand',[BrandController::class,'index'])->name('brand.index');
+Route::post('/brand/store/',[BrandController::class,'store'])->name('brand.store');
 
 
 

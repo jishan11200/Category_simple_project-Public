@@ -17,27 +17,33 @@
                       </div>
                     @endif
                     <table class="table table-bordered table-responsive table-hover">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th>SL</th>
                                 <th>Category Name</th>
-                                <th>User ID</th>
+                                <th>User</th>
                                 <th>Created_at</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($categories as $key=>$category)
-                            <tr>
+                            <tr class="text-center">
                                 <td>{{++$key}}</td>
                                 <td>{{$category->category_name}}</td>
                                 <td>{{$category->user_id}}</td>
                                 <td>{{$category->created_at->diffForHumans()}}</td>
+                                <td>
+                                    <a href="{{ Route('category.edit',$category->id) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ Route('category.sdelete',$category->id) }}" class="btn btn-danger">Remove</a>
+                                </td>
                             </tr>
                             @endforeach
 
                         </tbody>
 
                     </table>
+                    {{ $categories->links() }}
                 </div>
                 <div class="col-lg-4">
                     <div class="card">
@@ -60,6 +66,50 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="container mt-3">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title text-center">Trash List</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-responsive table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>SL</th>
+                                        <th>Category Name</th>
+                                        <th>User</th>
+                                        <th>Created_at</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($trashCategory as $key=>$category )
+                                        <tr>
+                                            <td>{{++$key}}</td>
+                                            <td>{{$category->category_name}}</td>
+                                            <td>{{$category->user_id}}</td>
+                                            <td>{{$category->created_at->diffForHumans()}}</td>
+                                            <td>
+                                                <a href="{{Route('category.restore',$category->id)}}" class="btn btn-primary">Restore</a>
+                                                <a href="{{Route('category.destroy',$category->id)}}" class="btn btn-danger">Delete</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>
